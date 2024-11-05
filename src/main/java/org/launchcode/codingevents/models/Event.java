@@ -1,17 +1,28 @@
 package org.launchcode.codingevents.models;
 
+import java.util.Objects;
+
 public class Event {
+
+    private int id;
+    private static int nextId = 1;
 
     private String name;
     private String description;
 
     public Event(){
-
+        this.id = nextId;
     };
 
     public Event(String name, String discription) {
         this.name = name;
         this.description = discription;
+        this.id = nextId;
+        nextId++;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -33,5 +44,18 @@ public class Event {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
